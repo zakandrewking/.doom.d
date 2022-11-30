@@ -73,3 +73,14 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+
+;; https://github.com/d12frosted/homebrew-emacs-plus
+(defun my/apply-theme (appearance)
+  "Load theme, taking current system APPEARANCE into consideration."
+  (mapc #'disable-theme custom-enabled-themes)
+  (pcase appearance
+    ('light (setq doom-theme 'doom-one-light) (load-theme 'doom-one-light t))
+    ('dark (setq doom-theme 'doom-one) (load-theme 'doom-one t))))
+
+(add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
